@@ -1,3 +1,9 @@
+# New Work 
+Just made this on top of gector and added two files main_file.py and app.py (for running flask app).
+I have left the original readme as it might give better insights.
+for running just clone and install requirements from requirements.txt and download pretrained xlnet model and put it in model sub directory and run app.py
+
+
 # GECToR – Grammatical Error Correction: Tag, Not Rewrite
 
 This repository provides code for training and testing state-of-the-art models for grammatical error correction with the official PyTorch implementation of the following paper:
