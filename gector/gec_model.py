@@ -248,6 +248,8 @@ class GecBERTModel(object):
                           error_probs,
                           max_len=50):
         all_results = []
+        passed_info=[]          #changed here
+
         noop_index = self.vocab.get_token_index("$KEEP", "labels")
         for tokens, probabilities, idxs, error_prob in zip(batch,
                                                            all_probabilities,
@@ -278,14 +280,23 @@ class GecBERTModel(object):
 
                 sugg_token = self.vocab.get_token_from_index(idxs[i],
                                                              namespace='labels')
+
                 action = self.get_token_action(token, i, probabilities[i],
                                                sugg_token)
+
+                tok=sugg_token                  #changed here
+                changed_pos=action[0]           #here
+                change_info=tok,changed_pos     #here
+                passed_info.append(change_info) #here
+
                 if not action:
                     continue
 
                 edits.append(action)
+
             all_results.append(get_target_sent_by_edits(tokens, edits))
-        return all_results
+
+        return all_results, passed_info
 
     def handle_batch(self, full_batch):
         """
@@ -296,8 +307,10 @@ class GecBERTModel(object):
         prev_preds_dict = {i: [final_batch[i]] for i in range(len(final_batch))}
         short_ids = [i for i in range(len(full_batch))
                      if len(full_batch[i]) < self.min_len]
-        pred_ids = [i for i in range(len(full_batch)) if i not in short_ids]
+        pred_ids = [i for i in range(len(full_batch)) if i not in short_ids]        
         total_updates = 0
+
+        info_for_change=[]          #changed here
 
         for n_iter in range(self.iterations):
             orig_batch = [final_batch[i] for i in pred_ids]
@@ -308,8 +321,11 @@ class GecBERTModel(object):
                 break
             probabilities, idxs, error_probs = self.predict(sequences)
 
-            pred_batch = self.postprocess_batch(orig_batch, probabilities,
+            pred_batch,passed_info = self.postprocess_batch(orig_batch, probabilities,
                                                 idxs, error_probs)
+
+            info_for_change=info_for_change+passed_info
+            
             if self.log:
                 print(f"Iteration {n_iter + 1}. Predicted {round(100*len(pred_ids)/batch_size, 1)}% of sentences.")
 
@@ -321,4 +337,4 @@ class GecBERTModel(object):
             if not pred_ids:
                 break
 
-        return final_batch, total_updates
+        return final_batch, total_updates, info_for_change
