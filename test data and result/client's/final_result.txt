@@ -1,0 +1,147 @@
+sentence: the dog are barking outside my house.
+result: {
+		  "corrected": "The dog is barking outside my house.", 
+		  "errors": {
+		    "0": "TRANSFORM CASE CAPITAL on the", 
+		    "1": "PUT is in place of are"
+		  }
+		}
+
+sentence: Will you agree with these agreement
+result: {
+		  "corrected": "Will you agree with this agreement ?", 
+		  "errors": {
+		    "0": "PUT this in place of these", 
+		    "1": "APPEND ? after agreement"
+		  }
+		}
+
+sentence:my father works with in a multi national company
+result: {
+		  "corrected": "My father works with a multi - national company .", 
+		  "errors": {
+		    "0": "TRANSFORM CASE CAPITAL on my", 
+		    "1": "DELETE in", 
+		    "2": "APPEND - after multi", 
+		    "3": "APPEND . after company"
+		  }
+		}
+
+sentence:The picture were hanging over the wall.
+result: {
+	  "corrected": "The picture was hanging on the wall.", 
+	  "errors": {
+	    "0": "PUT was in place of were", 
+	    "1": "PUT on in place of over"
+	  }
+	}
+
+sentence: that love dancing.
+result: {
+		  "corrected": "They love dancing.", 
+		  "errors": {
+		    "0": "TRANSFORM CASE CAPITAL on that", 
+		    "1": "PUT They in place of that"
+		  }
+		}
+
+sentence: The children were fighting to ice cream.
+result: {
+		  "corrected": "The children were fighting for ice cream.", 
+		  "errors": {
+		    "0": "PUT for in place of to"
+		  }
+		}
+
+sentence: There was a farmer whom had two sons.
+result: {
+		  "corrected": "There was a farmer who had two sons.", 
+		  "errors": {
+		    "0": "PUT who in place of whom"
+		  }
+		}
+
+sentence:The aeroplane flew on the town.
+result: {
+		  "corrected": "The aeroplane flew over the town.", 
+		  "errors": {
+		    "0": "PUT over in place of on"
+		  }
+		}
+
+sentence: I wearing my favourite dress.
+result: {
+		  "corrected": "I am wearing my favourite dress.", 
+		  "errors": {
+		    "0": "APPEND am after I"
+		  }
+		}
+
+sentence: This book are mine.
+result: {
+		  "corrected": "This book is mine.", 
+		  "errors": {
+		    "0": "PUT is in place of are"
+		  }
+		}
+
+sentence: the boys are not follow any rules
+result: {
+		  "corrected": "The boys do not follow any rules .", 
+		  "errors": {
+		    "0": "TRANSFORM CASE CAPITAL on the", 
+		    "1": "PUT do in place of are", 
+		    "2": "APPEND . after rules"
+		  }
+		}
+
+sentence: Where are you go for long drive?
+result: {
+		  "corrected": "Where do you go for a long drive ?", 
+		  "errors": {
+		    "0": "PUT do in place of are", 
+		    "1": "APPEND a after for", 
+		    "2": "APPEND ? after drive"
+		  }
+		}
+
+sentence: They are by paris.
+result: {
+		  "corrected": "They are in Paris.", 
+		  "errors": {
+		    "0": "PUT in in place of by", 
+		    "1": "TRANSFORM CASE CAPITAL on paris."
+		  }
+		}
+
+sentence: Shut the door in
+result: {
+		  "corrected": "Shut the door in", 
+		  "errors": {}
+		}
+
+sentence: Those is a red balloon
+result: {
+		  "corrected": "It is a red balloon", 
+		  "errors": {
+		    "0": "PUT It in place of Those"
+		  }
+		}
+
+
+
+
+
+
+sentence:i meet rahul today, it is my friend
+result: {
+		  "corrected": "I met Rahul today, He is my friend .", 
+		  "errors": {
+		    "0": "TRANSFORM CASE CAPITAL on i", 
+		    "1": "TRANSFORM VERB verb base form  verb past participle  on meet", 
+		    "2": "TRANSFORM CASE CAPITAL on rahul", 
+		    "3": "TRANSFORM CASE CAPITAL on it", 
+		    "4": "APPEND . after friend", 
+		    "5": "PUT He in place of it"
+		  }
+		}
