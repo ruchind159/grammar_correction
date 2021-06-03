@@ -1,9 +1,5 @@
-from flask import Flask           # import flask
-from flask import jsonify
-from main_file import load_model
-from main_file import predict_for_sentence
-from main_file import convert_to_dict
-from main_file import add_tokens
+from flask import Flask, redirect, render_template, jsonify, request          # import flask
+from main_file import load_model, predict_for_sentence, convert_to_dict, add_tokens
 
 
 app = Flask(__name__)             # create an app instance
@@ -16,9 +12,18 @@ def hello():                      # call method hello
     return "Hello World!"         # which returns "hello world"
 
 
+@app.route("/text",methods=["POST","GET"])
+def get_text():
+	if request.method=="POST":
+		sent=request.form['sent']
+		return redirect(f'/check?sentence={sent}')
+	else:
+		return render_template("grammar_text.html")
 
-@app.route("/<sentence>")              #this is same as the grammar check function in main file
-def correct_sent(sentence):
+
+@app.route("/check")              #this is same as the grammar check function in main file
+def correct_sent():
+	sentence=request.args.get('sentence')
 	corrected_sent,cnt_corrections,info_for_change = predict_for_sentence(sentence, model)
 
 	word_info=add_tokens(sentence,info_for_change)
